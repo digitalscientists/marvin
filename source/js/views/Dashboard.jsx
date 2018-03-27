@@ -28,7 +28,7 @@ export default class Dashboard extends Component {
 
     return (
       <div>
-        <h1>Shepard Organizer Dashboard</h1>
+        <h1>Dashboard</h1>
         {counter}
         <button onClick={this.handleTestButtonClick}>Increment</button>
       </div>

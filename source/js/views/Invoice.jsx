@@ -1,21 +1,16 @@
-
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import { Heading } from "shepard-styleguide";
-
-@connect(state => ({
-}))
+@connect(state => ({}))
 class Invoice extends Component {
-  static propTypes = {
-  }
+  static propTypes = {};
   render() {
-    const {  } = this.props;
+    const {} = this.props;
     return (
       <div>
-         <Heading>Invoice</Heading>
+        <h1>Invoice</h1>
       </div>
     );
   }
