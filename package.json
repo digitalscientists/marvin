@@ -8,17 +8,25 @@
     "start": "webpack-dev-server",
     "client:dev": "webpack-dev-server",
     "client:watch": "cross-env HYDRATE=\"true\" webpack",
-    "client:build": "npm run clean && cross-env NODE_ENV=\"production\" webpack",
-    "client:build-hydrate": "npm run clean && cross-env HYDRATE=\"true\" cross-env NODE_ENV=\"production\" webpack",
-    "client:preview": "npm run clean && cross-env NODE_ENV=\"production\" webpack-dev-server",
-    "server:watch": "cross-env SERVER_RENDER=\"true\" webpack --config webpack.config.server.js",
+    "client:build":
+      "npm run clean && cross-env NODE_ENV=\"production\" webpack",
+    "client:build-hydrate":
+      "npm run clean && cross-env HYDRATE=\"true\" cross-env NODE_ENV=\"production\" webpack",
+    "client:preview":
+      "npm run clean && cross-env NODE_ENV=\"production\" webpack-dev-server",
+    "server:watch":
+      "cross-env SERVER_RENDER=\"true\" webpack --config webpack.config.server.js",
     "server:restart": "nodemon",
-    "server:build": "cross-env SERVER_RENDER=\"true\" cross-env NODE_ENV=\"production\" webpack --config webpack.config.server.js",
-    "server:dev": "npm run clean && concurrently --prefix \"[{name}]\" --names \"build-server,node-server\" --kill-others \"npm run server:watch\" \"npm run server:restart\"",
-    "universal:dev": "concurrently -c blue,cyan,yellow --names \"build-server,build-client,node-server\" --kill-others \"npm run server:watch\" \"npm run client:watch\" \"npm run server:restart\"",
+    "server:build":
+      "cross-env SERVER_RENDER=\"true\" cross-env NODE_ENV=\"production\" webpack --config webpack.config.server.js",
+    "server:dev":
+      "npm run clean && concurrently --prefix \"[{name}]\" --names \"build-server,node-server\" --kill-others \"npm run server:watch\" \"npm run server:restart\"",
+    "universal:dev":
+      "concurrently -c blue,cyan,yellow --names \"build-server,build-client,node-server\" --kill-others \"npm run server:watch\" \"npm run client:watch\" \"npm run server:restart\"",
     "universal:build": "npm run client:build-hydrate && npm run server:build",
     "clean": "rm -rf ./build",
-    "lint-hook": "eslint ./source/js ./webpack ./*.js -f table --ext .js --ext .jsx",
+    "lint-hook":
+      "eslint ./source/js ./webpack ./*.js -f table --ext .js --ext .jsx",
     "lint": "npm run lint-hook --silent || true",
     "hook-add": "prepush install",
     "hook-remove": "prepush remove",
@@ -63,19 +71,30 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "autodux": "^3.0.0",
     "babel-polyfill": "^6.26.0",
-    "express": "^4.16.2",
+    "contentful": "^5.1.3",
+    "express": "^4.16.3",
     "immutable": "^3.8.2",
     "isomorphic-fetch": "^2.2.1",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
+    "js-cookie": "^2.2.0",
+    "lodash": "^4.17.5",
+    "marked": "^0.3.17",
+    "prop-types": "^15.6.1",
     "react-dom": "^16.2.0",
-    "react-hot-loader": "^4.0.0-beta.12",
-    "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
+    "react-hot-loader": "^4.0.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2",
+    "react-router": "^4.2.0",
+    "react-scrolllock": "^2.0.1",
+    "react": "^16.2.0",
     "redux-saga": "^0.16.0",
+    "redux": "^3.7.2",
+    "remotedev-serialize": "^0.1.0",
+    "semantic-ui-less": "2.2.14",
+    "semantic-ui-react": "^0.78.2",
+    "shepard-styleguide":
+      "git+ssh://git@github.com/digitalscientists/shepard-styleguide.git#organizer",
     "transit-immutable-js": "^0.7.0",
     "transit-js": "^0.8.846"
   },
@@ -84,18 +103,11 @@
     "type": "git",
     "url": "git+ssh://git@github.com/workco/marvin.git"
   },
-  "keywords": [
-    "react",
-    "redux",
-    "webpack2",
-    "boilerplate"
-  ],
+  "keywords": ["react", "redux", "webpack2", "boilerplate"],
   "author": "Stanko",
   "bugs": {
     "url": "https://github.com/workco/marvin/issues"
   },
   "homepage": "https://github.com/workco/marvin#readme",
-  "prepush": [
-    "npm run lint-hook --silent"
-  ]
+  "prepush": ["npm run lint-hook --silent"]
 }

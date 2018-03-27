@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
-import { routeCodes } from 'constants/routes';
-import Menu from 'components/global/Menu';
-import Home from 'views/Home';
-import People from 'views/People';
-import NotFound from 'views/NotFound';
-
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import { hot } from "react-hot-loader";
+import { routeCodes } from "constants/routes";
+import Menu from "components/global/Menu";
+import Dashboard from "views/Dashboard";
+import People from "views/People";
+import NotFound from "views/NotFound";
 
 class App extends Component {
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Menu />
 
-        <div className='Page'>
+        <div className="Page">
           <Switch>
-            <Route exact path={ routeCodes.HOME } component={ Home } />
-            <Route path={ routeCodes.PEOPLE } component={ People } />
-            <Route path='*' component={ NotFound } />
+            <Route exact path={routeCodes.DASHBOARD} component={Dashboard} />
+            <Route path={routeCodes.PEOPLE} component={People} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </div>

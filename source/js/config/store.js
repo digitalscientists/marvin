@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import logger from 'dev/logger';
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+import logger from "dev/logger";
 
-import transit from 'transit-immutable-js';
+import transit from "transit-immutable-js";
 
-import rootSaga from 'sagas';
-import rootReducer from 'reducers';
+import rootSaga from "models/sagas-index";
+import rootReducer from "models/reducers-index";
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 let initialState = {};
 
@@ -37,27 +37,26 @@ export default (serverSagas = null, sagaOptions = {}) => {
     middleware = applyMiddleware(sagaMiddleware, logger);
 
     // Enable DevTools if browser extension is installed
-    if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
+    if (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__) {
+      // eslint-disable-line
       middleware = compose(
         middleware,
-        window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
+        window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line
       );
     }
   }
 
   // Create store
   // with initial state if it exists
-  store = createStore(
-    rootReducer,
-    initialState,
-    middleware
-  );
+  store = createStore(rootReducer, initialState, middleware);
 
   // Server render
   // Remove if you are not using server rendering
   if (serverSagas) {
     // Start server sagas
-    const tasks = serverSagas.map(saga => sagaMiddleware.run(saga, sagaOptions));
+    const tasks = serverSagas.map(saga =>
+      sagaMiddleware.run(saga, sagaOptions),
+    );
 
     // Return both store and tasks
     return {
@@ -71,8 +70,8 @@ export default (serverSagas = null, sagaOptions = {}) => {
 
   // Enable Webpack hot module replacement for reducers
   if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers/index').default; // eslint-disable-line global-require
+    module.hot.accept("../models/reducers-index", () => {
+      const nextRootReducer = require("../models/reducers-index").default; // eslint-disable-line global-require
       store.replaceReducer(nextRootReducer);
     });
   }

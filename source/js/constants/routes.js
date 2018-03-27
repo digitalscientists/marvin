@@ -1,6 +1,6 @@
-export const publicPath = '/';
+export const publicPath = "/";
 
 export const routeCodes = {
-  HOME: publicPath,
-  PEOPLE: `${ publicPath }people`,
+  DASHBOARD: publicPath,
+  PEOPLE: `${publicPath}people`,
 };

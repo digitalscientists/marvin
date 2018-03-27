@@ -1,0 +1,4 @@
+{
+  "prettier.disableLanguages": ["less"],
+  "prettier.trailingComma": "all"
+}
