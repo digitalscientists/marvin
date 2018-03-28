@@ -1,5 +1,6 @@
 ---
-to: source/js/models/<%= name %>/sagas.js
+path: source/js/models/<%= name %>/sagas.js
+to: '<% if(components.includes("saga")){ %>source/js/models/<%= name %>/sagas.js<% } else { null } %>'
 ---
 import { takeLatest, call, put } from "redux-saga/effects";
 
