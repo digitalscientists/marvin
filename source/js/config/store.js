@@ -2,10 +2,14 @@ import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "dev/logger";
 
+import createHistory from 'history/createBrowserHistory'
 import transit from "transit-immutable-js";
 
 import rootSaga from "models/sagas-index";
 import rootReducer from "models/reducers-index";
+
+import {routerMiddleware, routerReducer} from 'react-router-redux'
+const history = createHistory()
 
 const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
@@ -27,14 +31,15 @@ export default (serverSagas = null, sagaOptions = {}) => {
   let middleware = null;
 
   const sagaMiddleware = createSagaMiddleware();
+  const routerReduxMiddleware= routerMiddleware(history)
 
   if (IS_PRODUCTION) {
     // In production we are adding only sagas middleware
-    middleware = applyMiddleware(sagaMiddleware);
+    middleware = applyMiddleware(sagaMiddleware, routerReduxMiddleware);
   } else {
     // In development mode beside sagaMiddleware
     // logger and DevTools are added
-    middleware = applyMiddleware(sagaMiddleware, logger);
+    middleware = applyMiddleware(sagaMiddleware, routerReduxMiddleware, logger);
 
     // Enable DevTools if browser extension is installed
     if (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__) {
@@ -80,5 +85,6 @@ export default (serverSagas = null, sagaOptions = {}) => {
   // But as an object for consistency
   return {
     store,
+    history
   };
 };

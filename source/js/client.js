@@ -3,7 +3,7 @@ import "isomorphic-fetch";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { ConnectedRouter, push } from 'react-router-redux'
 import { AppContainer } from "react-hot-loader";
 import { Provider } from "react-redux";
 
@@ -13,7 +13,8 @@ import App from "views/App";
 // Load CSS
 import "index.css";
 
-const store = configureStore().store;
+const {store, history} = configureStore();
+
 
 // When used with server dehydrated state "ReactDOM.hydrate" should be called
 const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
@@ -21,9 +22,9 @@ const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
 renderMethod(
   <AppContainer>
     <Provider store={store}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <App />
-      </BrowserRouter>
+      </ConnectedRouter>
     </Provider>
   </AppContainer>,
   document.getElementById("root"),
