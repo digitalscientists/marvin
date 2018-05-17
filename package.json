@@ -59,6 +59,7 @@
     "style-loader": "^0.19.1",
     "svgo": "^1.0.3",
     "svgo-loader": "^2.1.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
